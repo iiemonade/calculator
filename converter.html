@@ -223,6 +223,7 @@ input {
    <script >
 
 
+
 let input = document.querySelector('input');
 let output = document.getElementById('output');
 const toMetric = document.getElementById('toMetric');
@@ -237,6 +238,38 @@ const days = document.getElementById('days');
 const resetButton = document.getElementById('reset');
 
 
+
+const lengthButton = document.getElementById('length').addEventListener('click', (e) => {
+	input.style.display = 'block';
+	toFahrenheit.style.display = 'none';
+	toCelsius.style.display = 'none';
+	toKelvin.style.display = 'none';
+	hours.style.display = 'none';
+	days.style.display = 'none';
+	mileToKm.style.display = 'none';
+	kmToMile.style.display = 'none';
+	toMetric.style.display = 'block';
+	toImperial.style.display='block';
+	resetButton.style.display = 'block';
+	toMetric.addEventListener('click', (e) => {
+		output.innerHTML = `${input.value} inch &rarr; ${lengthUnits.imperial.inch()} mm <br>
+		${input.value} foot &rarr; ${lengthUnits.imperial.foot()} cm <br>
+		${input.value} yard &rarr; ${lengthUnits.imperial.yard()} m <br>
+		${input.value} mile &rarr; ${lengthUnits.imperial.mile()} km
+		`;
+	});
+	toImperial.addEventListener('click', (e) => {
+		output.innerHTML = `${input.value} mm &rarr; ${lengthUnits.metric.mm()} inch <br>
+		${input.value} cm &rarr; ${lengthUnits.metric.cm()} foot <br>
+		${input.value} m &rarr; ${lengthUnits.metric.m()} yard <br>
+		${input.value} km &rarr; ${lengthUnits.metric.km()} mile
+		`;
+	});
+	output.style.display = 'block';
+	output.innerHTML = "";
+	input.value = null;
+	
+});
 
 const massButton = document.getElementById('mass').addEventListener('click', (e) => {
 	input.style.display = 'block';
@@ -332,6 +365,53 @@ const temperatureButton = document.getElementById('temperature').addEventListene
 		
 });
 
+const speedButton = document.getElementById('speed').addEventListener('click', (e) => {
+	input.style.display = 'block';
+	toMetric.style.display = 'none';
+	toImperial.style.display = 'none';
+	toFahrenheit.style.display = 'none';
+	toCelsius.style.display = 'none';
+	toKelvin.style.display = 'none';
+	hours.style.display = 'none';
+	days.style.display = 'none';
+	mileToKm.style.display = 'block';
+	kmToMile.style.display = 'block';
+	resetButton.style.display = 'block';
+	mileToKm.addEventListener('click', (e) =>{
+		output.innerHTML = `${input.value} mph &rarr; ${speedUnits.mphToKmph()} km/hr`;
+	});	
+	kmToMile.addEventListener('click', (e) =>{
+		output.innerHTML = `${input.value} km/hr &rarr; ${speedUnits.kmphToMph()} mph`;
+	});
+	output.style.display = 'block';
+	output.innerHTML = "";
+	input.value = null;
+});
+
+const timeButton = document.getElementById('time').addEventListener('click', (e) => {
+	input.style.display = 'block';
+	toMetric.style.display = 'none';
+	toImperial.style.display = 'none';
+	toFahrenheit.style.display = 'none';
+	toCelsius.style.display = 'none';
+	toKelvin.style.display = 'none';
+	mileToKm.style.display = 'none';
+	kmToMile.style.display = 'none';
+	hours.style.display = 'block';
+	days.style.display = 'block';
+	resetButton.style.display = 'block';
+	hours.addEventListener('click', (e) =>{
+		output.innerHTML = `${input.value} minute &rarr; ${timeUnits.hours.minTohr()} hour <br>
+		${input.value} day &rarr; ${timeUnits.hours.dayTohr()} hour`;
+	});
+	days.addEventListener('click', (e) =>{
+		output.innerHTML = `${input.value} minute &rarr; ${timeUnits.days.minToDay()} day <br>
+		${input.value} hour &rarr; ${timeUnits.days.hrToDay()} day`;
+	});
+	output.style.display = 'block';
+	output.innerHTML = "";
+	input.value = null;
+});
 
 resetButton.addEventListener('click', (e) =>{
 	location.reload();
@@ -526,6 +606,8 @@ const timeUnits = {
 		}
 	}
 };
+
+
 
 
 
